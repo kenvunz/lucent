@@ -20,12 +20,12 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
-        "mockery/mockery": "~0.9"
+        "mockery/mockery": "~0.9",
+        "nesbot/carbon": "dev-master"
     },
     "require": {
         "illuminate/support": "5.1.*",
-        "illuminate/contracts": "5.1.*",
-        "nesbot/carbon": "dev-master"
+        "illuminate/contracts": "5.1.*"
     },
     "minimum-stability": "dev"
 }
