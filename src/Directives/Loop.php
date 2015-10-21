@@ -16,7 +16,7 @@ class Loop {
         $blade->directive('wploop', $this->start());
         $blade->directive('wpempty', $this->ifempty());
         $blade->directive('endwploop', $this->end());
-        $blade->directive('the', $this->the());
+        $blade->directive('wpthe', $this->the());
     }
 
     protected function start() {
@@ -70,9 +70,6 @@ class Loop {
         $self = $this;
 
         return function($exp) use ($self) {
-            if(!$self->hasStarted)
-                throw new DomainException("This directive is not allowed to called outside of the loop");
-
             $exp = trim($self->cleanExpression($exp), "\"'");
             if(!$exp)
                 throw new InvalidArgumentException("This directive require at least one argument");
