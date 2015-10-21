@@ -12,7 +12,7 @@ class TemplateFinderTest extends TestCase {
         $view->shouldReceive('exists')->once()->with('index')->andReturn(true)
             ->shouldReceive('getExtensions')->andReturn(['blade.php' => 'blade', 'php' => 'php']);
 
-        $this->assertEquals($instance->filter(['index']), 'index');
+        $this->assertEquals('index', $instance->filter(['index']));
     }
 
     public function testFilterWithIrregularTemplatesReturnAsExpected() {
@@ -21,7 +21,7 @@ class TemplateFinderTest extends TestCase {
         $view->shouldReceive('exists')->once()->with('index')->andReturn(true)
             ->shouldReceive('getExtensions')->andReturn(['blade.php' => 'blade', 'php' => 'php']);
 
-        $this->assertEquals($instance->filter(['index.blade.php']), 'index');
+        $this->assertEquals('index', $instance->filter(['index.blade.php']));
     }
 
     public function testFindReturnAsExpectedWithoutSecondArgument() {
@@ -30,7 +30,7 @@ class TemplateFinderTest extends TestCase {
         $view->shouldReceive('exists')->once()->with('index')->andReturn(true)
             ->shouldReceive('getExtensions')->andReturn(['blade.php' => 'blade', 'php' => 'php']);
 
-        $this->assertEquals($instance->find('index'), 'index');
+        $this->assertEquals('index', $instance->find('index'));
     }
 
     public function testFindReturnAsExpectedWithSecondArgument() {
@@ -39,7 +39,7 @@ class TemplateFinderTest extends TestCase {
         $view->shouldReceive('exists')->twice()->andReturn(false, true)
             ->shouldReceive('getExtensions')->andReturn(['blade.php' => 'blade', 'php' => 'php']);
 
-        $this->assertEquals($instance->find('index', ['index1', 'index2']), 'index2');
+        $this->assertEquals('index2', $instance->find('index', ['index1', 'index2']));
     }
 
     protected function getInstance() {
