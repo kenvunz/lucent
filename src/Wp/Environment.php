@@ -1,5 +1,5 @@
 <?php
-namespace Gladeye\Lucent;
+namespace Gladeye\Lucent\Wp;
 
 class Environment {
 

@@ -1,5 +1,5 @@
 <?php
-namespace Gladeye\Lucent;
+namespace Gladeye\Lucent\Support;
 
 use TestCase;
 use Mockery as m;

@@ -1,7 +1,8 @@
 <?php
-namespace Gladeye\Lucent;
+namespace Gladeye\Lucent\Wp;
 
 use Illuminate\Support\Str;
+use Gladeye\Lucent\Support\TemplateFinder;
 
 class Template {
 

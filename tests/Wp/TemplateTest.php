@@ -1,5 +1,5 @@
 <?php
-namespace Gladeye\Lucent;
+namespace Gladeye\Lucent\Wp;
 
 use TestCase;
 use Mockery as m;
@@ -206,7 +206,7 @@ class TemplateTest extends TestCase {
     }
 
     protected function getInstance() {
-        $finder = m::mock('Gladeye\Lucent\TemplateFinder')
+        $finder = m::mock('Gladeye\Lucent\Support\TemplateFinder')
             ->shouldIgnoreMissing();
         $env = m::mock(new Environment())
             ->shouldIgnoreMissing();

@@ -1,5 +1,5 @@
 <?php
-namespace Gladeye\Lucent;
+namespace Gladeye\Lucent\Support;
 
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
