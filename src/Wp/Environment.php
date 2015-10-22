@@ -20,6 +20,7 @@ class Environment {
         'is_date',
         'is_archive',
         'is_paged',
+        'is_admin',
 
         'get_query_var',
         'get_post_type_object',

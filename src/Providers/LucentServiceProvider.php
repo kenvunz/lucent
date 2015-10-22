@@ -13,9 +13,16 @@ class LucentServiceProvider extends ServiceProvider
      * @return void
      */
     public function register() {
-        // Register Template instance
+        $this->app->singleton('lucent.routes', function($app) {
+            return __DIR__.'/../Http/routes.php';
+        });
+
+        $this->app->singleton('lucent.env', function($app) {
+            return $app->make('Gladeye\Lucent\Wp\Environment');
+        });
+
         $this->app->singleton('lucent.template', function($app) {
-            return $app->make('Gladeye\Lucent\Template');
+            return $app->make('Gladeye\Lucent\Wp\Template');
         });
     }
 
@@ -45,5 +52,13 @@ class LucentServiceProvider extends ServiceProvider
 
         // Extend Blade with custom Wordpress directives
         BladeExtension::attach($app, $blade);
+    }
+
+    public function provides() {
+        return [
+            'lucent.routes',
+            'lucent.env',
+            'lucent.template'
+        ];
     }
 }
