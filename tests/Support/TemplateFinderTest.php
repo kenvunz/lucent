@@ -1,8 +1,8 @@
 <?php
 namespace Gladeye\Lucent\Support;
 
-use TestCase;
 use Mockery as m;
+use TestCase;
 
 class TemplateFinderTest extends TestCase {
 

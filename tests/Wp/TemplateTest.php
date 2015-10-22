@@ -1,8 +1,8 @@
 <?php
 namespace Gladeye\Lucent\Wp;
 
-use TestCase;
 use Mockery as m;
+use TestCase;
 
 class TemplateTest extends TestCase {
 
@@ -54,7 +54,7 @@ class TemplateTest extends TestCase {
             ->andReturn((object) ['has_archive' => true]);
 
         $finder->shouldReceive('find')->once()->with('archive', [
-            'archive.post', 'archive-post', 'archive'
+            'archive.post', 'archive-post', 'archive',
         ])->andReturn('archive.post');
 
         $this->assertEquals('archive.post', $instance->get('post-type-archive'));
@@ -65,7 +65,7 @@ class TemplateTest extends TestCase {
 
         $env->shouldReceive('get_query_var')->with('post_type')->once()->andReturn('post');
         $finder->shouldReceive('find')->once()->with('archive', [
-            'archive.post', 'archive-post', 'archive'
+            'archive.post', 'archive-post', 'archive',
         ])->andReturn('archive-post');
 
         $this->assertEquals('archive-post', $instance->get('archive'));
@@ -75,10 +75,10 @@ class TemplateTest extends TestCase {
         list($instance, $env, $finder) = $this->getInstance();
 
         $env->shouldReceive('get_queried_object')->once()
-            ->andReturn((object)['slug'=>'bar', 'taxonomy'=>'foo']);
+            ->andReturn((object) ['slug' => 'bar', 'taxonomy' => 'foo']);
 
         $finder->shouldReceive('find')->once()->with('taxonomy', [
-            'taxonomy.foo-bar', 'taxonomy.foo', 'taxonomy-foo-bar', 'taxonomy-foo', 'taxonomy'
+            'taxonomy.foo-bar', 'taxonomy.foo', 'taxonomy-foo-bar', 'taxonomy-foo', 'taxonomy',
         ])->andReturn('taxonomy.foo-bar');
 
         $this->assertEquals('taxonomy.foo-bar', $instance->get('taxonomy'));
@@ -88,11 +88,11 @@ class TemplateTest extends TestCase {
         list($instance, $env, $finder) = $this->getInstance();
 
         $env->shouldReceive('get_queried_object')->once()
-            ->andReturn((object)['post_mime_type'=>'text/plain']);
+            ->andReturn((object) ['post_mime_type' => 'text/plain']);
 
         $finder->shouldReceive('find')->once()->with('attachment', [
             'attachment.text-plain', 'attachment.plain', 'attachment.text',
-            'text-plain', 'plain', 'text', 'attachment'
+            'text-plain', 'plain', 'text', 'attachment',
         ])->andReturn('attachment.text-plain');
 
         $this->assertEquals('attachment.text-plain', $instance->get('attachment'));
@@ -102,10 +102,10 @@ class TemplateTest extends TestCase {
         list($instance, $env, $finder) = $this->getInstance();
 
         $env->shouldReceive('get_queried_object')->once()
-            ->andReturn((object)['post_type'=>'post']);
+            ->andReturn((object) ['post_type' => 'post']);
 
         $finder->shouldReceive('find')->once()->with('single', [
-            'single.post', 'single-post', 'single'
+            'single.post', 'single-post', 'single',
         ])->andReturn('single.post');
 
         $this->assertEquals('single.post', $instance->get('single'));
@@ -119,9 +119,8 @@ class TemplateTest extends TestCase {
             ->shouldReceive('get_query_var')->once()->with('pagename')->andReturn('foo')
             ->shouldReceive('validate_file')->once()->andReturn(0);
 
-
         $finder->shouldReceive('find')->once()->with('page', [
-            'foo.blade.php', 'page.foo', 'page.1', 'page-foo', 'page-1', 'page'
+            'foo.blade.php', 'page.foo', 'page.1', 'page-foo', 'page-1', 'page',
         ])->andReturn('page');
 
         $this->assertEquals('page', $instance->get('page'));
@@ -138,13 +137,13 @@ class TemplateTest extends TestCase {
     public function testGetCategoryTemplateReturnAsExpected() {
         list($instance, $env, $finder) = $this->getInstance();
 
-        $env->shouldReceive('get_queried_object')->once()->andReturn((object)[
-            "slug"=>"foo",
-            "term_id"=>1
+        $env->shouldReceive('get_queried_object')->once()->andReturn((object) [
+            "slug" => "foo",
+            "term_id" => 1,
         ]);
 
         $finder->shouldReceive('find')->once()->with('category', [
-            'category.foo', 'category.1', 'category-foo', 'category-1', 'category'
+            'category.foo', 'category.1', 'category-foo', 'category-1', 'category',
         ])->andReturn('category');
 
         $this->assertEquals('category', $instance->get('category'));
@@ -153,13 +152,13 @@ class TemplateTest extends TestCase {
     public function testGetTagTemplateReturnAsExpected() {
         list($instance, $env, $finder) = $this->getInstance();
 
-        $env->shouldReceive('get_queried_object')->once()->andReturn((object)[
-            "slug"=>"foo",
-            "term_id"=>1
+        $env->shouldReceive('get_queried_object')->once()->andReturn((object) [
+            "slug" => "foo",
+            "term_id" => 1,
         ]);
 
         $finder->shouldReceive('find')->once()->with('tag', [
-            'tag.foo', 'tag.1', 'tag-foo', 'tag-1', 'tag'
+            'tag.foo', 'tag.1', 'tag-foo', 'tag-1', 'tag',
         ])->andReturn('tag');
 
         $this->assertEquals('tag', $instance->get('tag'));
@@ -175,7 +174,7 @@ class TemplateTest extends TestCase {
         $env->shouldReceive('get_queried_object')->once()->andReturn($user);
 
         $finder->shouldReceive('find')->once()->with('author', [
-            'author.foo', 'author.1', 'author-foo', 'author-1', 'author'
+            'author.foo', 'author.1', 'author-foo', 'author-1', 'author',
         ])->andReturn('author');
 
         $this->assertEquals('author', $instance->get('author'));

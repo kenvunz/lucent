@@ -14,8 +14,9 @@ class TemplateFinder {
     public function find($type, $templates = array()) {
         $type = preg_replace('|[^a-z0-9-]+|', '', $type);
 
-        if (empty($templates))
+        if (empty($templates)) {
             $templates = array("{$type}");
+        }
 
         $template = $this->filter($templates);
         return $template;
@@ -24,9 +25,9 @@ class TemplateFinder {
     public function filter($templates) {
         $located = null;
 
-        foreach((array) $templates as  $template) {
+        foreach ((array) $templates as $template) {
             $template = $this->normalise($template);
-            if($this->view->exists($template)) {
+            if ($this->view->exists($template)) {
                 $located = $template;
                 break;
             }
@@ -36,7 +37,7 @@ class TemplateFinder {
     }
 
     protected function normalise($template) {
-        $extensions = array_map(function($value) {
+        $extensions = array_map(function ($value) {
             return ".{$value}";
         }, array_keys($this->view->getExtensions()));
 

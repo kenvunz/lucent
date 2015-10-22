@@ -12,7 +12,7 @@ class LoopTest extends TestCase {
 
         $app = new Container();
         $files = $app->make('Illuminate\Filesystem\Filesystem');
-        $blade = new BladeCompiler($files, __DIR__.'/../../tmp');
+        $blade = new BladeCompiler($files, __DIR__ . '/../../tmp');
 
         $instance = new Loop();
         $instance->extendTo($blade);

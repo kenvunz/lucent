@@ -10,6 +10,6 @@ class Template extends Facade {
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'lucent.template'; }
+    protected static function getFacadeAccessor() {return 'lucent.template';}
 
 }

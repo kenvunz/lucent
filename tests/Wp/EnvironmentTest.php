@@ -3,13 +3,11 @@ namespace Gladeye\Lucent\Wp;
 
 use TestCase;
 
-class EnvironmentTest extends TestCase
-{
+class EnvironmentTest extends TestCase {
     /**
      * @expectedException     \BadFunctionCallException
      */
-    public function testExceptionRaisedForUnregisterdFunction()
-    {
+    public function testExceptionRaisedForUnregisterdFunction() {
         $env = new Environment();
         $env->sum();
     }

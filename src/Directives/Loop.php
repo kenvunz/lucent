@@ -1,9 +1,7 @@
 <?php
-
 namespace Gladeye\Lucent\Directives;
 
 use Illuminate\View\Compilers\BladeCompiler;
-use DomainException;
 use InvalidArgumentException;
 
 class Loop {
@@ -21,17 +19,19 @@ class Loop {
 
     protected function start() {
         $self = $this;
-        return function($exp) use ($self) {
+        return function ($exp) use ($self) {
             $output = "";
             $prefix = "";
 
             $exp = $self->cleanExpression($exp);
             $self->startWithExpression = !!($exp);
 
-            if($self->startWithExpression) {
+            if ($self->startWithExpression) {
                 $output = "<?php \$__query = new Wp_Query({$exp}); ?> ";
                 $prefix = "\$__query->";
-            } else $exp = "";
+            } else {
+                $exp = "";
+            }
 
             $self->hasStarted = true;
 
@@ -42,7 +42,7 @@ class Loop {
     protected function ifempty() {
         $self = $this;
 
-        return function() use ($self) {
+        return function () use ($self) {
             $self->hasElse = true;
             return "<?php endwhile; else: ?>";
         };
@@ -51,13 +51,13 @@ class Loop {
     protected function end() {
         $self = $this;
 
-        return function() use ($self) {
+        return function () use ($self) {
             $output = [
                 "<?php",
-                !$self->hasElse? "endwhile;" : "",
+                !$self->hasElse ? "endwhile;" : "",
                 "endif;",
-                $self->startWithExpression? "wp_reset_postdata();" : "",
-                "?>"
+                $self->startWithExpression ? "wp_reset_postdata();" : "",
+                "?>",
             ];
 
             $self->reset();
@@ -69,10 +69,11 @@ class Loop {
     protected function the() {
         $self = $this;
 
-        return function($exp) use ($self) {
+        return function ($exp) use ($self) {
             $exp = trim($self->cleanExpression($exp), "\"'");
-            if(!$exp)
+            if (!$exp) {
                 throw new InvalidArgumentException("This directive require at least one argument");
+            }
 
             return "<?php the_$exp(); ?>";
         };
