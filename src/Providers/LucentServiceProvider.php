@@ -22,6 +22,16 @@ class LucentServiceProvider extends ServiceProvider {
         $this->app->singleton('lucent.template', function ($app) {
             return $app->make('Gladeye\Lucent\Wp\Template');
         });
+
+        $this->app->singleton('lucent.command.assets', function ($app) {
+            return $app->make('Gladeye\Lucent\Commands\Assets');
+        });
+
+        $this->app->singleton('lucent.command.bower', function ($app) {
+            return $app->make('Gladeye\Lucent\Commands\Bower');
+        });
+
+        $this->commands('lucent.command.assets', 'lucent.command.bower');
     }
 
     public function boot() {
@@ -57,6 +67,8 @@ class LucentServiceProvider extends ServiceProvider {
             'lucent.routes',
             'lucent.env',
             'lucent.template',
+            'lucent.command.assets',
+            'lucent.command.bower',
         ];
     }
 }
