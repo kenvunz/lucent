@@ -60,6 +60,10 @@ class LucentServiceProvider extends ServiceProvider {
 
         // Extend Blade with custom Wordpress directives
         BladeExtension::attach($app, $blade);
+
+        $app->group(['namespace' => 'Gladeye\Lucent'], function ($app) {
+            require __DIR__ . '/../Wp/actions.php';
+        });
     }
 
     public function provides() {
