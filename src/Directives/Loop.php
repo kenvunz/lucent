@@ -70,12 +70,12 @@ class Loop {
         $self = $this;
 
         return function ($exp) use ($self) {
-            $exp = trim($self->cleanExpression($exp), "\"'");
+            $exp = $self->cleanExpression($exp);
             if (!$exp) {
                 throw new InvalidArgumentException("This directive require at least one argument");
             }
 
-            return "<?php the_$exp(); ?>";
+            return "<?php Gladeye\\Lucent\\Directives\\the($exp); ?>";
         };
     }
 
@@ -88,4 +88,11 @@ class Loop {
     protected function cleanExpression($exp) {
         return trim(preg_replace("/\(\s+\)/", "()", $exp), "()");
     }
+}
+
+function the() {
+    $args = func_get_args();
+    $func = array_shift($args);
+
+    call_user_func_array("the_$func", $args);
 }

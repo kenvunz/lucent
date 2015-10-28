@@ -57,7 +57,14 @@ class LoopTest extends TestCase {
 
     public function testTheDirectiveCompiledAsExpected() {
         $actual = $this->blade->compileString("@wploop @wpthe('title') @endwploop");
-        $expected = "<?php if(have_posts()): while(have_posts()): the_post(); ?> <?php the_title(); ?> <?php endwhile; endif; ?>";
+        $expected = "<?php if(have_posts()): while(have_posts()): the_post(); ?> <?php Gladeye\\Lucent\\Directives\\the('title'); ?> <?php endwhile; endif; ?>";
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testTheDirectiveWithArgumentsCompiledAsExpected() {
+        $actual = $this->blade->compileString("@wploop @wpthe('title', 'foo', 'baz') @endwploop");
+        $expected = "<?php if(have_posts()): while(have_posts()): the_post(); ?> <?php Gladeye\\Lucent\\Directives\\the('title', 'foo', 'baz'); ?> <?php endwhile; endif; ?>";
 
         $this->assertEquals($expected, $actual);
     }
