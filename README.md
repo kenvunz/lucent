@@ -1,3 +1,3 @@
-#gladeye/lucent
+#lucent
 
-A little glue that makes Wordpress & Lumen working beautiful together.
+A simple glue that makes Wordpress & Lumen working well together.
