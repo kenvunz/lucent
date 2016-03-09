@@ -15,7 +15,7 @@ class LucentServiceProvider extends ServiceProvider {
             return __DIR__ . '/../Http/routes.php';
         });
 
-        $this->app->singleton('\Gladeye\Lucent\Wp\Environment', function ($app) {
+        $this->app->singleton('Gladeye\Lucent\Wp\Environment', function ($app) {
             $whitelist = [
                 'is_404',
                 'is_search',
@@ -47,7 +47,7 @@ class LucentServiceProvider extends ServiceProvider {
             return new \Gladeye\Lucent\Wp\Environment($whitelist);
         });
 
-        $this->app->alias('\Gladeye\Lucent\Wp\Environment', 'lucent.env');
+        $this->app->alias('Gladeye\Lucent\Wp\Environment', 'lucent.env');
 
         $this->app->singleton('lucent.template', function ($app) {
             return $app->make('Gladeye\Lucent\Wp\Template');
