@@ -22,14 +22,14 @@
         "phpunit/phpunit": "~4.0",
         "mockery/mockery": "~0.9",
         "nesbot/carbon": "~1.20",
-        "illuminate/container": "5.1.*",
-        "illuminate/view": "5.1.*",
-        "laravel/lumen-framework": "5.1.*"
+        "illuminate/container": "5.2.*",
+        "illuminate/view": "5.2.*",
+        "laravel/lumen-framework": "5.2.*"
     },
     "require": {
-        "illuminate/support": "5.1.*",
-        "illuminate/contracts": "5.1.*",
-        "illuminate/console": "5.1.*"
+        "illuminate/support": "5.2.*",
+        "illuminate/contracts": "5.2.*",
+        "illuminate/console": "5.2.*"
     },
     "minimum-stability": "dev"
 }
