@@ -20,14 +20,12 @@ class WordpressMiddleware {
     {
         $response = $next($request);
 
-        if($response->status() === 404) {
-            if($this->env->is_admin()) return $response;
+        global $wp_query;
 
-            global $wp_query;
-
-            if($wp_query->is_404()) return $response;
-
+        if($response->status() === 404 && !$wp_query->is_404() && !$this->env->is_admin()) {
             return view($this->template->get());
         }
+
+        return $response;
     }
 }
