@@ -3,6 +3,8 @@ namespace Gladeye\Lucent\Providers;
 
 use Gladeye\Lucent\Extensions\Blade as BladeExtension;
 use Illuminate\Support\ServiceProvider;
+use Gladeye\Lucent\Wp\Environment;
+use Gladeye\Lucent\Wp\Template;
 
 class LucentServiceProvider extends ServiceProvider {
     /**
@@ -44,14 +46,18 @@ class LucentServiceProvider extends ServiceProvider {
                 'get_queried_object'
             ];
 
-            return new \Gladeye\Lucent\Wp\Environment($whitelist);
+            return new Environment($whitelist);
         });
 
         $this->app->alias('Gladeye\Lucent\Wp\Environment', 'lucent.env');
 
-        $this->app->singleton('lucent.template', function ($app) {
-            return $app->make('Gladeye\Lucent\Wp\Template');
+        $this->app->singleton('Gladeye\Lucent\Wp\Template', function ($app) {
+            $env = $app->make('lucent.env');
+            $finder = $app->make('Gladeye\Lucent\Support\TemplateFinder');
+            return new Template($env, $finder);
         });
+
+        $this->app->alias('Gladeye\Lucent\Wp\Template', 'lucent.template');
     }
 
     public function boot() {
